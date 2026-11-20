@@ -295,8 +295,8 @@ abbr { text-decoration: none; }
         </div>
         <div class="cap s7">
           <h3>Embedded Firmware</h3>
-          <p><abbr>STM32F411</abbr>에서 <abbr>HAL</abbr>과 register 직접 제어(baremetal <abbr>GPIO</abbr>)를 모두 다룹니다. Timer interrupt, <abbr>EXTI</abbr>, <abbr>PWM</abbr>, <abbr>I2C</abbr> device driver(<abbr>LCD</abbr>, <abbr>DS3231</abbr> <abbr>RTC</abbr>), <abbr>DHT11</abbr>·<abbr>SR04</abbr> 센서, 직접 정의한 <abbr>UART</abbr> packet protocol을 쓰고, driver, service, app 계층으로 firmware를 구조화합니다.</p>
-          <ul class="tools"><li>C</li><li><abbr>STM32</abbr> <abbr>HAL</abbr></li><li>STM32CubeIDE</li><li><abbr>I2C</abbr></li><li><abbr>PWM</abbr></li></ul>
+          <p><abbr>STM32F411</abbr>에서 <abbr>HAL</abbr>과 register 직접 제어(baremetal <abbr>GPIO</abbr>)를 모두 다룹니다. Timer interrupt, <abbr>EXTI</abbr>, <abbr>PWM</abbr>, <abbr>I2C</abbr> device driver(<abbr>LCD</abbr>, <abbr>DS3231</abbr> <abbr>RTC</abbr>), <abbr>DHT11</abbr>·<abbr>SR04</abbr> 센서, FreeRTOS task·queue·mutex, 직접 정의한 <abbr>UART</abbr> packet protocol을 쓰고, driver, service, app 계층으로 firmware를 구조화합니다.</p>
+          <ul class="tools"><li>C</li><li>FreeRTOS</li><li><abbr>STM32</abbr> <abbr>HAL</abbr></li><li>STM32CubeIDE</li><li><abbr>I2C</abbr></li><li><abbr>PWM</abbr></li></ul>
         </div>
         <div class="cap s5">
           <h3>Software</h3>
@@ -320,8 +320,8 @@ abbr { text-decoration: none; }
           <tr><td><a href="#p-rv32i">Multi-cycle <abbr>RV32I</abbr> <abbr>CPU</abbr>와 <abbr>APB</abbr> SoC</a></td><td class="measured">2026.09.01 – 09.16</td><td class="dim">4인 팀</td><td class="dim">Multi-cycle <abbr>CPU</abbr> core, <abbr>CPU</abbr>와 <abbr>APB</abbr> 사이 interface</td></tr>
           <tr><td><a href="#p-fifo">동기식 <abbr>FIFO</abbr> 설계와 <abbr>UVM</abbr> 검증 환경</a></td><td class="measured">2026.08 – 09.07</td><td class="dim">개인</td><td class="dim"><abbr>DUT</abbr> 설계, <abbr>UVM</abbr> 환경 전체</td></tr>
           <tr><td><a href="#p-dht11"><abbr>DHT11</abbr> 센서 controller와 <abbr>UART</abbr> 통합</a></td><td class="measured">2026.08.12 – 08.24</td><td class="dim">팀 미니 프로젝트</td><td class="dim"><abbr>DHT11</abbr> controller, <abbr>ASCII</abbr> encoder/decoder</td></tr>
+          <tr><td><a href="#p-rccar">FreeRTOS 자율주행 <abbr>RC</abbr>카</a></td><td class="measured">2026.11.12 – 11.16</td><td class="dim">2인 팀</td><td class="dim">RTOS 구조, 센서·모터 driver, 자율주행 logic</td></tr>
           <tr><td><a href="#p-elevator"><abbr>STM32</abbr> 엘리베이터 2대 그룹 제어</a></td><td class="measured">2026.11.05 – 11.06</td><td class="dim">2인 팀</td><td class="dim">Firmware 전체, 배차 algorithm, <abbr>UART</abbr> protocol</td></tr>
-          <tr><td><a href="#p-stm32"><abbr>STM32</abbr> 아날로그·디지털 시계 firmware</a></td><td class="measured">2026.10.16 – 10.30</td><td class="dim">개인</td><td class="dim">Driver, service, app 전 계층</td></tr>
           <tr><td><a href="#p-watch"><abbr>FPGA</abbr> stopwatch와 시계</a></td><td class="measured">2026.07.28 – 08.02</td><td class="dim">2인 팀</td><td class="dim">Watch datapath, top 통합, save/load 기능</td></tr>
         </tbody>
       </table>
@@ -432,7 +432,43 @@ abbr { text-decoration: none; }
         </div>
       </article>
 
-      <!-- 4. Elevator -->
+      <!-- 4. RC car -->
+      <article class="case" id="p-rccar">
+        <dl class="meta">
+          <div><dt>기간</dt><dd class="measured">2026.11.12 – 11.16</dd></div>
+          <div><dt>형태</dt><dd>2인 팀</dd></div>
+          <div><dt>담당</dt><dd>RTOS 구조, 센서·모터 driver, 자율주행 logic</dd></div>
+          <div class="full"><dt>도구</dt><dd class="stack"><span>C</span><span>FreeRTOS</span><span><abbr>STM32F411</abbr></span><span><abbr>HAL</abbr></span><span><abbr>EXTI</abbr></span><span><abbr>PWM</abbr></span><span><abbr>UART</abbr></span></dd></div>
+        </dl>
+        <div>
+          <h3><a href="https://github.com/jeongmin-0113/proj_stm32_RTOS_rc_car" target="_blank" rel="noopener">FreeRTOS 자율주행 <abbr>RC</abbr>카</a></h3>
+          <p class="repo"><a href="https://github.com/jeongmin-0113/proj_stm32_RTOS_rc_car" target="_blank" rel="noopener">github.com/jeongmin-0113/proj_stm32_RTOS_rc_car</a></p>
+          <p class="lede">스마트폰 블루투스로 조종하는 수동 모드와, 초음파 센서 3개로 벽을 피해 혼자 코스를 도는 자율주행 모드를 가진 2륜 <abbr>RC</abbr>카입니다. 직각으로 꺾이는 벽 코스를 부딪히지 않고 완주하는 것을 기준으로 개발했고, 주행 영상을 레포에 올려 두었습니다.</p>
+
+          <h4>내가 한 일</h4>
+          <ul>
+            <li>블루투스, 버튼, <abbr>PC</abbr> 명령, 거리 측정, 모터 제어를 FreeRTOS task 5개로 나누고, 입력 3종은 message queue로 모터 task에 전달. 여러 task가 쓰는 <abbr>LCD</abbr>는 mutex로 보호</li>
+            <li><abbr>HC-SR04</abbr> driver를 센서 여러 개를 다루도록 확장하고, echo 시간은 <abbr>EXTI</abbr> 양쪽 edge와 <abbr>DWT</abbr> cycle counter로 측정. 초음파 간섭을 막으려고 앞, 왼쪽, 오른쪽을 17ms 간격으로 하나씩 측정</li>
+            <li>자율주행을 <abbr>STOP</abbr>, <abbr>STRAIGHT</abbr>, <abbr>LEFT</abbr>, <abbr>RIGHT</abbr> 상태머신으로 설계. 앞이 막히면 더 넓은 쪽으로 제자리 회전</li>
+            <li><abbr>TIM3</abbr> <abbr>PWM</abbr> 두 채널로 좌우 바퀴 duty를 따로 주는 motor driver와 블루투스(<abbr>HC-05</abbr>) 수동 조종, 수동/자율 mode 전환, 비상 정지 버튼 구현</li>
+          </ul>
+
+          <h4>고민과 개선</h4>
+          <div class="diff">
+            <div class="minus"><span class="g">−</span><span class="k">현상</span><span class="v">앞 거리가 기준값 근처에서 흔들리면 직진과 회전이 계속 번갈아 바뀜</span></div>
+            <div class="why"><span class="g">?</span><span class="k">원인</span><span class="v">상태에 들어가는 기준과 나오는 기준이 같은 값 하나였음</span></div>
+            <div class="plus"><span class="g">+</span><span class="k">개선</span><span class="v">25cm에서 회전을 시작하고 45cm가 되어야 직진으로 돌아오도록 hysteresis 적용</span></div>
+          </div>
+          <div class="diff">
+            <div class="minus"><span class="g">−</span><span class="k">현상</span><span class="v">벽 보정을 넣었는데도 차가 한쪽 벽으로 계속 붙음</span></div>
+            <div class="why"><span class="g">?</span><span class="k">원인</span><span class="v">보정 값 변수가 unsigned라 −40이 216으로 바뀌어 반대 방향으로 크게 보정됨</span></div>
+            <div class="plus"><span class="g">+</span><span class="k">개선</span><span class="v">부호 있는 type으로 바꾸고, 측정 실패 값은 0이나 최대값 대신 직전 유효 값을 유지하도록 정리</span></div>
+          </div>
+          <p class="note">방향 <abbr>LED</abbr>와 후진 경고 buzzer는 팀원이 구현했습니다.</p>
+        </div>
+      </article>
+
+      <!-- 5. Elevator -->
       <article class="case" id="p-elevator">
         <dl class="meta">
           <div><dt>기간</dt><dd class="measured">2026.11.05 – 11.06</dd></div>
@@ -469,43 +505,7 @@ abbr { text-decoration: none; }
         </div>
       </article>
 
-      <!-- 5. STM32 -->
-      <article class="case" id="p-stm32">
-        <dl class="meta">
-          <div><dt>기간</dt><dd class="measured">2026.10.16 – 10.30</dd></div>
-          <div><dt>형태</dt><dd>개인</dd></div>
-          <div><dt>담당</dt><dd>Driver, service, app 전 계층</dd></div>
-          <div class="full"><dt>도구</dt><dd class="stack"><span>C</span><span><abbr>STM32F411</abbr></span><span>STM32CubeIDE</span><span><abbr>HAL</abbr></span><span><abbr>I2C</abbr></span><span><abbr>PWM</abbr></span></dd></div>
-        </dl>
-        <div>
-          <h3><a href="https://github.com/jeongmin-0113/proj_analog_clock_stopwatch" target="_blank" rel="noopener"><abbr>STM32</abbr> 아날로그·디지털 시계 firmware</a></h3>
-          <p class="repo"><a href="https://github.com/jeongmin-0113/proj_analog_clock_stopwatch" target="_blank" rel="noopener">github.com/jeongmin-0113/proj_analog_clock_stopwatch</a></p>
-          <p class="lede">Step motor로 시계 바늘을 움직이는 아날로그 시계와, <abbr>FND</abbr>와 <abbr>I2C</abbr> <abbr>LCD</abbr>로 보여 주는 디지털 시계·stopwatch를 하나의 firmware로 만들었습니다. 시간은 <abbr>DS3231</abbr> <abbr>RTC</abbr>와 동기화하고, 이후 <abbr>DHT11</abbr>, <abbr>SR04</abbr>, buzzer까지 통합했습니다.</p>
-
-          <h4>내가 한 일</h4>
-          <ul>
-            <li>Driver, service, app 계층을 나눠 button, <abbr>LED</abbr>, <abbr>FND</abbr>, <abbr>LCD</abbr>, <abbr>DS3231</abbr>, step motor driver를 직접 작성. 상위 계층은 set 함수로 데이터만 넘기고 hardware 세부는 driver에 캡슐화</li>
-            <li>Timer 3개로 역할 분리: <abbr>TIM3</abbr> 1ms interrupt로 <abbr>FND</abbr> 4-digit dynamic scan, <abbr>TIM4</abbr> 10ms로 시간 계산, <abbr>TIM9</abbr> 3ms마다 바늘을 target step까지 한 step씩 이동(1회전 4096 step)</li>
-            <li><abbr>DS3231</abbr>은 <abbr>BCD</abbr> encode/decode와 repeated start read로 1초마다 시간, 1시간마다 날짜를 동기화</li>
-            <li><abbr>LCD</abbr>는 이전 값과 비교해 바뀐 경우에만 갱신해서 <abbr>I2C</abbr> transaction 수를 줄임</li>
-            <li>Button 입력을 circular queue에 event로 쌓아 main loop에서 하나씩 처리하고, <abbr>PWM</abbr> 주파수를 바꿔 event별 buzzer음 출력</li>
-          </ul>
-
-          <h4>고민과 개선</h4>
-          <div class="diff">
-            <div class="minus"><span class="g">−</span><span class="k">현상</span><span class="v">Mode 전환이나 시간을 크게 옮길 때 바늘 제어 코드가 따로 필요해 보임</span></div>
-            <div class="why"><span class="g">?</span><span class="k">원인</span><span class="v">바늘 위치를 시간 값에 직접 묶으면 상황마다 분기가 생김</span></div>
-            <div class="plus"><span class="g">+</span><span class="k">개선</span><span class="v">Current step과 target step만 두고 <abbr>ISR</abbr>이 차이를 좁히게 해서 평소 동작과 mode 전환을 같은 logic으로 처리</span></div>
-          </div>
-          <div class="diff">
-            <div class="minus"><span class="g">−</span><span class="k">현상</span><span class="v">센서 통합 뒤 <abbr>DHT11</abbr> 값이 초기값 0에서 갱신되지 않음</span></div>
-            <div class="why"><span class="g">?</span><span class="k">원인</span><span class="v">1ms <abbr>FND</abbr> interrupt가 μs 단위 <abbr>DHT11</abbr> 수신을 끊어 checksum 실패</span></div>
-            <div class="plus"><span class="g">+</span><span class="k">개선</span><span class="v"><abbr>FND</abbr> <abbr>ISR</abbr>을 끄면 정상 측정됨을 확인해 원인을 확정. 수신 구간 보호 방식은 개선 중</span></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- 5. Stopwatch -->
+      <!-- 6. Stopwatch -->
       <article class="case" id="p-watch">
         <dl class="meta">
           <div><dt>기간</dt><dd class="measured">2026.07.28 – 08.02</dd></div>
